@@ -98,4 +98,41 @@ class RestaurantServiceTest{
     //<<<<<<<<<<<<<<<<<<<<ADMIN: ADDING & REMOVING RESTAURANTS>>>>>>>>>>>>>>>>>>>>>>>>>>
 
 
+
+                                    //Test cases
+    //writing test method to display selected item total price
+    //assusme that the name of the item we selected will be stored as list of string
+    // select restaurant to see menu of that restaurant by giving restaurant name, it uses  findRestaurantByname() in RestaurantService
+    //this restaurant should display menu
+    //select items in menu using items name (give list of item name as input), here I am using select_item_from_particular_restaurant_menu_and_display_price() method
+    //sum of selected item is 388 for "sweet corn soup" and "vegetable lasagne"
+    //assert the price
+    @Test
+    public void selected_item_from_particular_restaurant_name_should_display_total_cost_of_item_selected() throws restaurantNotFoundException {
+        //arrange
+        //selecting restaurant to see menu
+        String restaurant_name= "Amelie's cafe";
+        //see menu and select item from menu
+        System.out.println("see the menu below and select items: ");
+        List<String> item_names = new ArrayList<>();
+        String item1= "Sweet corn soup";
+        String item2 = "Vegetable lasagne";
+        int price;
+
+        //act
+        restaurant =service.addRestaurant("Amelie's cafe","Chennai",openingTime,closingTime);
+        restaurant.addToMenu("Sweet corn soup",119);
+        restaurant.addToMenu("Vegetable lasagne", 269);
+        restaurant.addToMenu("paneer manchury",140);
+        //adding selected_items to item_name list
+        item_names.add(item1);
+        item_names.add(item2);
+        price = service.select_item_from_particular_restaurant_menu_and_display_price(restaurant_name,item_names);
+
+
+        //assert
+        assertEquals(388,price);
+
+
+    }
 }
