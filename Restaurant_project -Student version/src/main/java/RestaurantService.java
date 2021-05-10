@@ -38,6 +38,22 @@ public class RestaurantService {
     }
 
 
+    public int select_item_from_particular_restaurant_menu_and_display_price(String restaurant_name,List<String> item_name) throws restaurantNotFoundException {
+        int price = 0;
+        List<String> item_name_list = new ArrayList<String>();
+        item_name_list=item_name;
+        Restaurant restaurant = findRestaurantByName(restaurant_name);
+        System.out.println(restaurant.getMenu());
+        for (Item item : restaurant.getMenu()) {
+            for (String name : item_name_list) {
+                if (item.getName().equals(name)) {
+                    price = price + item.getPrice();
+                }
+            }
+        }
+        return price;
+    }
+
 
 
 }
